@@ -21,6 +21,9 @@
   .hubcard .go{color:var(--accent);font-weight:600;font-size:.82rem;margin-top:12px}
   .hubcard.pending{opacity:.62;pointer-events:none}
   .hubcard.pending .go{color:var(--muted)}
+  .cose-video{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:14px 0 4px;
+    border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
+  .cose-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 </head>
 <body data-site-id="cose-hub" data-brand-logo="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-logo.png">
@@ -39,6 +42,23 @@
 </header>
 
 <main id="hub"></main>
+
+<section>
+  <div class="wrap">
+    <h2>Watch</h2>
+    <p class="sub">A short from the CoSE YouTube channel — <em>CoSE SciSpinner Max at Purdue</em>.</p>
+    <div class="cose-video">
+      <iframe src="https://www.youtube.com/embed/nyJ-vKcWNmU" title="CoSE SciSpinner Max at Purdue"
+        loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+    <div class="btns" style="margin-top:16px">
+      <a class="btn primary" href="https://www.youtube.com/@DrRichardBarker?sub_confirmation=1" target="_blank" rel="noopener">▶ Subscribe on YouTube</a>
+      <a class="btn" href="https://www.youtube.com/@DrRichardBarker" target="_blank" rel="noopener">@DrRichardBarker</a>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
