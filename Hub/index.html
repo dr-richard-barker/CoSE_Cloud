@@ -21,9 +21,7 @@
   .hubcard .go{color:var(--accent);font-weight:600;font-size:.82rem;margin-top:12px}
   .hubcard.pending{opacity:.62;pointer-events:none}
   .hubcard.pending .go{color:var(--muted)}
-  .hubcard .thumb{width:100%;aspect-ratio:16/8;border-radius:9px;display:flex;align-items:center;
-    justify-content:center;font-size:2.3rem;line-height:1;margin:0 0 12px;
-    box-shadow:inset 0 -20px 30px -20px rgba(0,0,0,.35)}
+  .hubcard .thumb{width:100%;aspect-ratio:16/9;border-radius:9px;display:block;margin:0 0 12px;object-fit:cover}
   .cose-video{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:14px 0 4px;
     border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
   .cose-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -104,10 +102,10 @@
       var pending = (it.live === false || !it.url), card;
       if(pending){ card = document.createElement("div"); card.className = "hubcard pending"; }
       else { card = document.createElement("a"); card.className = "hubcard"; card.href = it.url; total++; }
-      var th = THUMBS[it.id];
-      if(th){ var badge = document.createElement("div"); badge.className = "thumb";
-        badge.style.background = "linear-gradient(135deg,"+th[1]+" 0%, rgba(0,0,0,.30) 155%)";
-        badge.textContent = th[0]; card.appendChild(badge); }
+      var img = document.createElement("img"); img.className = "thumb"; img.alt = ""; img.loading = "lazy";
+      img.src = "https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/thumbs/" + it.id + ".svg";
+      img.onerror = function(){ img.remove(); };
+      card.appendChild(img);
       var t = document.createElement("h3"); t.textContent = it.title; card.appendChild(t);
       if(it.desc){ var p = document.createElement("p"); p.textContent = it.desc; card.appendChild(p); }
       var go = document.createElement("span"); go.className = "go";
