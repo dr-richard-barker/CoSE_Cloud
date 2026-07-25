@@ -21,6 +21,9 @@
   .hubcard .go{color:var(--accent);font-weight:600;font-size:.82rem;margin-top:12px}
   .hubcard.pending{opacity:.62;pointer-events:none}
   .hubcard.pending .go{color:var(--muted)}
+  .hubcard .thumb{width:100%;aspect-ratio:16/8;border-radius:9px;display:flex;align-items:center;
+    justify-content:center;font-size:2.3rem;line-height:1;margin:0 0 12px;
+    box-shadow:inset 0 -20px 30px -20px rgba(0,0,0,.35)}
   .cose-video{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:14px 0 4px;
     border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
   .cose-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -73,6 +76,19 @@
 (function(){
   var reg = window.BARKER_SITES, hub = document.getElementById("hub");
   if(!reg || !reg.groups || !hub) return;
+  var THUMBS={
+    "Plant_response_to_radiation":["\u2622\uFE0F","#3B6EA5"], "LunarLeaf-CFD":["\uD83C\uDF43","#2FA8A0"],
+    "deepspace-seed-stress-decoder":["\uD83C\uDF30","#5B5BD6"], "Astronaut_health_search":["\uD83E\uDDEC","#3B6EA5"],
+    "Astronaut_trends":["\uD83D\uDCCA","#4A7DB5"], "Tropism_autodecoder_2026":["\uD83E\uDDED","#3E9C6D"],
+    "arabidopsis-spaceflight-omics":["\uD83C\uDF3F","#4C87C9"], "B_rappa_LLGCSS":["\uD83C\uDF38","#C264A0"],
+    "APEX05_results_and_code":["\uD83E\uDEB4","#4FA06A"], "TICTOC":["\uD83E\uDDF5","#D98A3D"],
+    "smallRNAseq-DREAM":["\uD83E\uDDEB","#2FA8A0"], "osdr-plant-microbiome":["\uD83E\uDDA0","#4FA06A"],
+    "veg05-integrated-omics":["\uD83C\uDF45","#D25B5B"], "Anthocyanin-Image-analysis":["\uD83C\uDF41","#8A6BC0"],
+    "astroroot":["\uD83D\uDEF0\uFE0F","#4CA07A"], "virtual-root":["\uD83C\uDF31","#3E9C6D"],
+    "madwest-astrobotany":["\uD83D\uDE80","#35507F"], "Settlers_of_Mars_3D_LLM":["\uD83E\uDE90","#C15B3C"],
+    "OSDR_jupyter_book.io":["\uD83D\uDCD3","#3B6EA5"], "AIRI":["\uD83C\uDF0D","#4FA06A"],
+    "aph-physiospace":["\uD83E\uDDE0","#7A8699"]
+  };
   var total = 0;
   reg.groups.forEach(function(g){
     var sec = document.createElement("section");
@@ -88,6 +104,10 @@
       var pending = (it.live === false || !it.url), card;
       if(pending){ card = document.createElement("div"); card.className = "hubcard pending"; }
       else { card = document.createElement("a"); card.className = "hubcard"; card.href = it.url; total++; }
+      var th = THUMBS[it.id];
+      if(th){ var badge = document.createElement("div"); badge.className = "thumb";
+        badge.style.background = "linear-gradient(135deg,"+th[1]+" 0%, rgba(0,0,0,.30) 155%)";
+        badge.textContent = th[0]; card.appendChild(badge); }
       var t = document.createElement("h3"); t.textContent = it.title; card.appendChild(t);
       if(it.desc){ var p = document.createElement("p"); p.textContent = it.desc; card.appendChild(p); }
       var go = document.createElement("span"); go.className = "go";
