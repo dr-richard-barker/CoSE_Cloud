@@ -105,7 +105,7 @@
       if(pending){ card = document.createElement("div"); card.className = "hubcard pending"; }
       else { card = document.createElement("a"); card.className = "hubcard"; card.href = it.url; total++; }
       var img = document.createElement("img"); img.className = "thumb"; img.alt = ""; img.loading = "lazy";
-      img.src = "https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/thumbs/" + it.id + ".svg?v=3";
+      img.src = "https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/thumbs/" + it.id + ".svg?v=4";
       img.onerror = function(){ img.remove(); };
       card.appendChild(img);
       var t = document.createElement("h3"); t.textContent = it.title; card.appendChild(t);
