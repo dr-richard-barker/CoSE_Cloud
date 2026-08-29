@@ -25,6 +25,69 @@
   .cose-video{position:relative;width:100%;max-width:330px;aspect-ratio:9/16;margin:14px 0 4px;
     border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000}
   .cose-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* CYOA Adventure Console Styling */
+  .adventure-console {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0 30px;
+    font-family: var(--mono, monospace);
+  }
+  .console-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .console-text {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--fg);
+  }
+  .console-text span.blink {
+    color: var(--accent);
+    animation: console-blink 1s infinite;
+    font-weight: bold;
+  }
+  @keyframes console-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .console-choices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 600px) {
+    .console-choices {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .console-choice-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+  }
+  .console-choice-btn:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+    background: rgba(var(--accent-rgb, 47, 143, 95), 0.05);
+    transform: translateY(-1px);
+  }
+  .console-choice-btn .icon {
+    font-size: 1.1rem;
+  }
 </style>
 </head>
 <body data-site-id="cose-hub" data-brand-logo="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-logo.png">
@@ -45,7 +108,22 @@
   </div>
 </header>
 
-<main id="hub"></main>
+<main id="hub">
+  <div class="wrap">
+    <!-- Choose Your Own Adventure Console -->
+    <div class="adventure-console">
+      <div class="console-body">
+        <p class="console-text"><span class="blink">&gt;</span> Welcome, Commander, to the Collaborative Science Environment (CoSE). You are aboard the orbital station. Your terminal is linked to our deep space life-support and biology registry. Where do you wish to direct your exploration?</p>
+        <div class="console-choices">
+          <a href="#interactive-notebooks-web-tools-pipelines" class="console-choice-btn"><span class="icon">💻</span> Path A: Launch Web Tools & Pipelines</a>
+          <a href="#games-3d-simulations" class="console-choice-btn"><span class="icon">🕹️</span> Path B: Access simulation deck (Games)</a>
+          <a href="#documentation-education-hubs" class="console-choice-btn"><span class="icon">📓</span> Path C: Open training manuals (Education)</a>
+          <a href="#publications-code-repositories" class="console-choice-btn"><span class="icon">🧬</span> Path D: Read core genetic publications</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 <section>
   <div class="wrap">
@@ -93,6 +171,7 @@
   var total = 0;
   reg.groups.forEach(function(g){
     var sec = document.createElement("section");
+    sec.id = g.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     var wrap = document.createElement("div"); wrap.className = "wrap";
     var live = g.items.filter(function(it){ return it.url && it.live !== false; }).length;
     var h = document.createElement("h2");
