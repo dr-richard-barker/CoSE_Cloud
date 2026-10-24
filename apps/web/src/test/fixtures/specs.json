@@ -1,0 +1,1881 @@
+{
+ "bar-1": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": null,
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "tooltip": [
+      {
+       "field": "series"
+      },
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "type": "temporal"
+      },
+      {
+       "field": "value",
+       "format": ".3~f",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "xOffset": {
+      "field": "series"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": true
+      },
+      "title": "Dome air temperature (\u00b0C)",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "cornerRadiusEnd": 4,
+     "type": "bar"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "bar 1"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "bar-2": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": {
+       "orient": "top",
+       "title": null
+      },
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "tooltip": [
+      {
+       "field": "series"
+      },
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "type": "temporal"
+      },
+      {
+       "field": "value",
+       "format": ".3~f",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "xOffset": {
+      "field": "series"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": true
+      },
+      "title": "\u00b0C",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "cornerRadiusEnd": 4,
+     "type": "bar"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "bar 2"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)",
+      "Root-zone temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "bar-3": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "resolve": {
+   "scale": {
+    "color": "independent",
+    "y": "independent"
+   }
+  },
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "bar 3"
+  },
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "h": {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height"
+    },
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)",
+    "Mean canopy height (mm)"
+   ]
+  },
+  "vconcat": [
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": {
+         "orient": "top",
+         "title": null
+        },
+        "scale": {
+         "domain": [
+          "Dome air temperature (\u00b0C)",
+          "Root-zone temperature (\u00b0C)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "tooltip": [
+        {
+         "field": "series"
+        },
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "type": "temporal"
+        },
+        {
+         "field": "value",
+         "format": ".3~f",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "xOffset": {
+        "field": "series"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": true
+        },
+        "title": "\u00b0C",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "cornerRadiusEnd": 4,
+       "type": "bar"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   },
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": null,
+        "scale": {
+         "domain": [
+          "Mean canopy height (mm)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "tooltip": [
+        {
+         "field": "series"
+        },
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "type": "temporal"
+        },
+        {
+         "field": "value",
+         "format": ".3~f",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "xOffset": {
+        "field": "series"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": true
+        },
+        "title": "Mean canopy height (mm)",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "cornerRadiusEnd": 4,
+       "type": "bar"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Mean canopy height (mm)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   }
+  ]
+ },
+ "line-1": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": null,
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": false
+      },
+      "title": "Dome air temperature (\u00b0C)",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "interpolate": "monotone",
+     "strokeWidth": 2,
+     "type": "line"
+    }
+   },
+   {
+    "encoding": {
+     "opacity": {
+      "condition": {
+       "empty": false,
+       "param": "hover_0",
+       "value": 0.6
+      },
+      "value": 0
+     },
+     "tooltip": [
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "title": "Time",
+       "type": "temporal"
+      },
+      {
+       "field": "Dome air temperature (\u00b0C)",
+       "format": ".3~f",
+       "title": "Dome air temperature (\u00b0C)",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "field": "ts",
+      "type": "temporal"
+     }
+    },
+    "mark": {
+     "opacity": 0.6,
+     "strokeWidth": 1,
+     "type": "rule"
+    },
+    "params": [
+     {
+      "name": "hover_0",
+      "select": {
+       "clear": "pointerout",
+       "fields": [
+        "ts"
+       ],
+       "nearest": true,
+       "on": "pointerover",
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "groupby": [
+       "ts"
+      ],
+      "pivot": "series",
+      "value": "value"
+     }
+    ]
+   },
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": null,
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "opacity": {
+      "condition": {
+       "empty": false,
+       "param": "hover_0",
+       "value": 1
+      },
+      "value": 0
+     },
+     "x": {
+      "field": "ts",
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "filled": true,
+     "size": 64,
+     "type": "point"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "line 1"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "line-2": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": {
+       "orient": "top",
+       "title": null
+      },
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": false
+      },
+      "title": "\u00b0C",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "interpolate": "monotone",
+     "strokeWidth": 2,
+     "type": "line"
+    }
+   },
+   {
+    "encoding": {
+     "opacity": {
+      "condition": {
+       "empty": false,
+       "param": "hover_0",
+       "value": 0.6
+      },
+      "value": 0
+     },
+     "tooltip": [
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "title": "Time",
+       "type": "temporal"
+      },
+      {
+       "field": "Dome air temperature (\u00b0C)",
+       "format": ".3~f",
+       "title": "Dome air temperature (\u00b0C)",
+       "type": "quantitative"
+      },
+      {
+       "field": "Root-zone temperature (\u00b0C)",
+       "format": ".3~f",
+       "title": "Root-zone temperature (\u00b0C)",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "field": "ts",
+      "type": "temporal"
+     }
+    },
+    "mark": {
+     "opacity": 0.6,
+     "strokeWidth": 1,
+     "type": "rule"
+    },
+    "params": [
+     {
+      "name": "hover_0",
+      "select": {
+       "clear": "pointerout",
+       "fields": [
+        "ts"
+       ],
+       "nearest": true,
+       "on": "pointerover",
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "groupby": [
+       "ts"
+      ],
+      "pivot": "series",
+      "value": "value"
+     }
+    ]
+   },
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": {
+       "orient": "top",
+       "title": null
+      },
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "opacity": {
+      "condition": {
+       "empty": false,
+       "param": "hover_0",
+       "value": 1
+      },
+      "value": 0
+     },
+     "x": {
+      "field": "ts",
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "filled": true,
+     "size": 64,
+     "type": "point"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "line 2"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)",
+      "Root-zone temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "line-3": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "resolve": {
+   "scale": {
+    "color": "independent",
+    "y": "independent"
+   }
+  },
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "line 3"
+  },
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "h": {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height"
+    },
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)",
+    "Mean canopy height (mm)"
+   ]
+  },
+  "vconcat": [
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": {
+         "orient": "top",
+         "title": null
+        },
+        "scale": {
+         "domain": [
+          "Dome air temperature (\u00b0C)",
+          "Root-zone temperature (\u00b0C)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": false
+        },
+        "title": "\u00b0C",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "interpolate": "monotone",
+       "strokeWidth": 2,
+       "type": "line"
+      }
+     },
+     {
+      "encoding": {
+       "opacity": {
+        "condition": {
+         "empty": false,
+         "param": "hover_0",
+         "value": 0.6
+        },
+        "value": 0
+       },
+       "tooltip": [
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "title": "Time",
+         "type": "temporal"
+        },
+        {
+         "field": "Dome air temperature (\u00b0C)",
+         "format": ".3~f",
+         "title": "Dome air temperature (\u00b0C)",
+         "type": "quantitative"
+        },
+        {
+         "field": "Root-zone temperature (\u00b0C)",
+         "format": ".3~f",
+         "title": "Root-zone temperature (\u00b0C)",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "field": "ts",
+        "type": "temporal"
+       }
+      },
+      "mark": {
+       "opacity": 0.6,
+       "strokeWidth": 1,
+       "type": "rule"
+      },
+      "params": [
+       {
+        "name": "hover_0",
+        "select": {
+         "clear": "pointerout",
+         "fields": [
+          "ts"
+         ],
+         "nearest": true,
+         "on": "pointerover",
+         "type": "point"
+        }
+       }
+      ],
+      "transform": [
+       {
+        "groupby": [
+         "ts"
+        ],
+        "pivot": "series",
+        "value": "value"
+       }
+      ]
+     },
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": {
+         "orient": "top",
+         "title": null
+        },
+        "scale": {
+         "domain": [
+          "Dome air temperature (\u00b0C)",
+          "Root-zone temperature (\u00b0C)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "opacity": {
+        "condition": {
+         "empty": false,
+         "param": "hover_0",
+         "value": 1
+        },
+        "value": 0
+       },
+       "x": {
+        "field": "ts",
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "filled": true,
+       "size": 64,
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   },
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": null,
+        "scale": {
+         "domain": [
+          "Mean canopy height (mm)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": false
+        },
+        "title": "Mean canopy height (mm)",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "interpolate": "monotone",
+       "strokeWidth": 2,
+       "type": "line"
+      }
+     },
+     {
+      "encoding": {
+       "opacity": {
+        "condition": {
+         "empty": false,
+         "param": "hover_1",
+         "value": 0.6
+        },
+        "value": 0
+       },
+       "tooltip": [
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "title": "Time",
+         "type": "temporal"
+        },
+        {
+         "field": "Mean canopy height (mm)",
+         "format": ".3~f",
+         "title": "Mean canopy height (mm)",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "field": "ts",
+        "type": "temporal"
+       }
+      },
+      "mark": {
+       "opacity": 0.6,
+       "strokeWidth": 1,
+       "type": "rule"
+      },
+      "params": [
+       {
+        "name": "hover_1",
+        "select": {
+         "clear": "pointerout",
+         "fields": [
+          "ts"
+         ],
+         "nearest": true,
+         "on": "pointerover",
+         "type": "point"
+        }
+       }
+      ],
+      "transform": [
+       {
+        "groupby": [
+         "ts"
+        ],
+        "pivot": "series",
+        "value": "value"
+       }
+      ]
+     },
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": null,
+        "scale": {
+         "domain": [
+          "Mean canopy height (mm)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "opacity": {
+        "condition": {
+         "empty": false,
+         "param": "hover_1",
+         "value": 1
+        },
+        "value": 0
+       },
+       "x": {
+        "field": "ts",
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "filled": true,
+       "size": 64,
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Mean canopy height (mm)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   }
+  ]
+ },
+ "scatter-1": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": null,
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "tooltip": [
+      {
+       "field": "series"
+      },
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "type": "temporal"
+      },
+      {
+       "field": "value",
+       "format": ".3~f",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": false
+      },
+      "title": "Dome air temperature (\u00b0C)",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "filled": true,
+     "size": 64,
+     "type": "point"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "scatter 1"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "scatter-2": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "height": 220,
+  "layer": [
+   {
+    "encoding": {
+     "color": {
+      "field": "series",
+      "legend": {
+       "orient": "top",
+       "title": null
+      },
+      "scale": {
+       "domain": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      },
+      "type": "nominal"
+     },
+     "tooltip": [
+      {
+       "field": "series"
+      },
+      {
+       "field": "ts",
+       "format": "%Y-%m-%d %H:%M",
+       "type": "temporal"
+      },
+      {
+       "field": "value",
+       "format": ".3~f",
+       "type": "quantitative"
+      }
+     ],
+     "x": {
+      "axis": {
+       "format": "%b %d %H:%M",
+       "labelOverlap": true
+      },
+      "field": "ts",
+      "title": null,
+      "type": "temporal"
+     },
+     "y": {
+      "field": "value",
+      "scale": {
+       "zero": false
+      },
+      "title": "\u00b0C",
+      "type": "quantitative"
+     }
+    },
+    "mark": {
+     "filled": true,
+     "size": 64,
+     "type": "point"
+    }
+   }
+  ],
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "scatter 2"
+  },
+  "transform": [
+   {
+    "filter": {
+     "field": "series",
+     "oneOf": [
+      "Dome air temperature (\u00b0C)",
+      "Root-zone temperature (\u00b0C)"
+     ]
+    }
+   }
+  ],
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)"
+   ]
+  },
+  "width": "container"
+ },
+ "scatter-3": {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "autosize": {
+   "contains": "padding",
+   "type": "fit-x"
+  },
+  "data": {
+   "name": "points",
+   "values": [
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:00:00+00:00",
+     "value": 0.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:01:00+00:00",
+     "value": 1.0
+    },
+    {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height",
+     "ts": "2026-09-01T05:02:00+00:00",
+     "value": 2.0
+    }
+   ]
+  },
+  "resolve": {
+   "scale": {
+    "color": "independent",
+    "y": "independent"
+   }
+  },
+  "title": {
+   "anchor": "start",
+   "subtitle": [
+    "SIMULATED \u2014 test"
+   ],
+   "text": "scatter 3"
+  },
+  "usermeta": {
+   "notes": [
+    "SIMULATED \u2014 test"
+   ],
+   "provenance": [
+    "simulated"
+   ],
+   "series_by_metric": {
+    "h": {
+     "series": "Mean canopy height (mm)",
+     "short": "Mean canopy height"
+    },
+    "r": {
+     "series": "Root-zone temperature (\u00b0C)",
+     "short": "Root-zone temperature"
+    },
+    "t": {
+     "series": "Dome air temperature (\u00b0C)",
+     "short": "Dome air temperature"
+    }
+   },
+   "series_order": [
+    "Dome air temperature (\u00b0C)",
+    "Root-zone temperature (\u00b0C)",
+    "Mean canopy height (mm)"
+   ]
+  },
+  "vconcat": [
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": {
+         "orient": "top",
+         "title": null
+        },
+        "scale": {
+         "domain": [
+          "Dome air temperature (\u00b0C)",
+          "Root-zone temperature (\u00b0C)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "tooltip": [
+        {
+         "field": "series"
+        },
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "type": "temporal"
+        },
+        {
+         "field": "value",
+         "format": ".3~f",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": false
+        },
+        "title": "\u00b0C",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "filled": true,
+       "size": 64,
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Dome air temperature (\u00b0C)",
+        "Root-zone temperature (\u00b0C)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   },
+   {
+    "height": 150,
+    "layer": [
+     {
+      "encoding": {
+       "color": {
+        "field": "series",
+        "legend": null,
+        "scale": {
+         "domain": [
+          "Mean canopy height (mm)"
+         ]
+        },
+        "type": "nominal"
+       },
+       "tooltip": [
+        {
+         "field": "series"
+        },
+        {
+         "field": "ts",
+         "format": "%Y-%m-%d %H:%M",
+         "type": "temporal"
+        },
+        {
+         "field": "value",
+         "format": ".3~f",
+         "type": "quantitative"
+        }
+       ],
+       "x": {
+        "axis": {
+         "format": "%b %d %H:%M",
+         "labelOverlap": true
+        },
+        "field": "ts",
+        "title": null,
+        "type": "temporal"
+       },
+       "y": {
+        "field": "value",
+        "scale": {
+         "zero": false
+        },
+        "title": "Mean canopy height (mm)",
+        "type": "quantitative"
+       }
+      },
+      "mark": {
+       "filled": true,
+       "size": 64,
+       "type": "point"
+      }
+     }
+    ],
+    "transform": [
+     {
+      "filter": {
+       "field": "series",
+       "oneOf": [
+        "Mean canopy height (mm)"
+       ]
+      }
+     }
+    ],
+    "width": "container"
+   }
+  ]
+ }
+}

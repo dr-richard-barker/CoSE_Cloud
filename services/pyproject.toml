@@ -12,6 +12,7 @@ authors = [{ name = "Collaborative Science Environment Inc. (CoSE)" }]
 dependencies = [
   "cose-ingest-core",
   "cose-care-agent[mqtt]>=0.1.1",
+  "anthropic>=1.15,<2",            # the major CoSE-Care-Agent's provider was written and tested against
   "fastapi>=0.115",
   "uvicorn>=0.30",
   "psycopg[binary]>=3.2",

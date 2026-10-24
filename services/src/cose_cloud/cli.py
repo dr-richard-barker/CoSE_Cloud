@@ -5,6 +5,7 @@
     cose-cloud create-user --org hq --email someone@example.org --role analyst   (password from $COSE_NEW_PASSWORD)
     cose-cloud register-device --org hq --device xseed-0001 --product xseed --origin hardware
     cose-cloud acl                                          (the broker access rules, to stdout)
+    cose-cloud serve --env-file deploy/dev.env              (development API on 127.0.0.1:8429)
 """
 
 from __future__ import annotations
@@ -72,6 +73,22 @@ def cmd_register_device(conn, a) -> None:
     print(f"registered {a.device} ({a.product}, {a.origin}) in {a.org}")
 
 
+def load_env_file(path: str) -> None:
+    """KEY=VALUE lines into os.environ (comments and blank lines skipped); existing variables win."""
+    for line in open(path, encoding="utf-8"):
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+def cmd_serve(a) -> None:
+    import uvicorn
+    if a.env_file:
+        load_env_file(a.env_file)
+    uvicorn.run("cose_cloud.api:app", host=a.host, port=a.port)
+
+
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(prog="cose-cloud", description="CoSE Cloud admin commands")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -99,9 +116,16 @@ def main(argv=None) -> None:
     d.add_argument("--label")
     d.add_argument("--variant")
     sub.add_parser("acl", help="print the broker access rules")
+    sv = sub.add_parser("serve", help="run the API (development; production uses the compose stack)")
+    sv.add_argument("--env-file")
+    sv.add_argument("--host", default="127.0.0.1")
+    sv.add_argument("--port", type=int, default=8429)
     a = ap.parse_args(argv)
     if a.cmd == "acl":
         sys.stdout.write(acl_text())
+        return
+    if a.cmd == "serve":
+        cmd_serve(a)
         return
     with connect(settings().database_url) as conn:
         {"migrate": cmd_migrate, "seed": cmd_seed, "create-user": cmd_create_user,

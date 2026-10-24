@@ -21,7 +21,7 @@ from psycopg_pool import ConnectionPool
 from pydantic import BaseModel, Field
 
 from cose_cloud import __version__, auth, editions, export, queries
-from cose_cloud.agent import ledger
+from cose_cloud.agent import charts, ledger
 from cose_cloud.agent.loop import AgentUnavailable, Org, ask, provider_for
 from cose_cloud.config import Settings, settings
 
@@ -159,6 +159,22 @@ def series(device_uuid: str, metrics: str, day: Optional[str] = None, start: Opt
     s, e, label = queries.window(start, end, day, dev["timezone"])
     out = queries.series(conn, p.org_id, device_uuid, _metrics_param(metrics), s, e, bucket_s)
     return {**out, "window": label}
+
+
+@app.get("/api/devices/{device_uuid}/chart")
+def chart(device_uuid: str, metrics: str, title: str = Query(default="", max_length=120), day: Optional[str] = None,
+          start: Optional[str] = None, end: Optional[str] = None, p: auth.Principal = Depends(me),
+          conn: psycopg.Connection = Depends(get_conn)) -> dict:
+    """A server-built chart (the same builder CoSE_Agent uses), for the dashboards."""
+    dev = queries.device(conn, p.org_id, device_uuid)
+    s, e, label = queries.window(start, end, day, dev["timezone"])
+    out = queries.series(conn, p.org_id, device_uuid, _metrics_param(metrics), s, e)
+    order = _metrics_param(metrics)
+    registry = sorted(out["metrics"], key=lambda m: order.index(m["key"]))
+    spec = charts.build(out["points"], registry, title=title or f"{dev['label'] or device_uuid}",
+                        provenance_notes=[dev["provenance_note"]] if dev["provenance_note"] else [],
+                        provenance=[dev["provenance"]])
+    return {"spec": spec, "window": label, "bucket_s": out["bucket_s"], "window_utc": out["window_utc"]}
 
 
 @app.get("/api/devices/{device_uuid}/since")

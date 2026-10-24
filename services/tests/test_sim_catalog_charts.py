@@ -137,12 +137,21 @@ PTS = [{"metric": k, "ts": START + timedelta(minutes=i), "value": float(i), "n":
 def test_different_units_never_share_an_axis():
     spec = charts.build(PTS, METRICS, title="x", provenance_notes=["SIMULATED — test"], provenance=["simulated"])
     assert len(spec["vconcat"]) == 2 and spec["resolve"]["scale"]["y"] == "independent"
+    assert spec["data"]["name"] == charts.DATA_NAME and len(spec["data"]["values"]) == 9
+    hovers = [l["params"][0]["name"] for panel in spec["vconcat"] for l in panel["layer"] if "params" in l]
+    assert len(hovers) == len(set(hovers)) == 2        # unique selection names across panels
     assert spec["title"]["subtitle"] == ["SIMULATED — test"]
+    long = charts.build(PTS, METRICS[:1], title="x", provenance_notes=["SIMULATED — CoSE-Care-Agent SimPod v0.1.1 "
+                        "(s0_nominal, seed 0), sim-uncalibrated"], provenance=["simulated"])
+    assert len(long["title"]["subtitle"]) == 2 and long["title"]["subtitle"][0].startswith("SIMULATED")
 
 
 def test_one_unit_is_one_panel_with_legend_and_labels():
     spec = charts.build(PTS, METRICS[:2], title="x", provenance_notes=[], provenance=["measured"])
     assert "vconcat" not in spec and spec["layer"][0]["encoding"]["color"]["legend"] is not None
+    assert not any(layer["mark"]["type"] == "text" for layer in spec["layer"])  # both end at 2.0: labels would collide
+    apart = [{**p, "value": p["value"] * (10 if p["metric"] == "r" else 1)} for p in PTS]
+    spec = charts.build(apart, METRICS[:2], title="x", provenance_notes=[], provenance=["measured"])
     assert any(layer["mark"]["type"] == "text" for layer in spec["layer"])     # end-of-line labels
     single = charts.build(PTS, METRICS[:1], title="x", provenance_notes=[], provenance=["measured"])
     assert single["layer"][0]["encoding"]["color"]["legend"] is None
@@ -165,3 +174,15 @@ def test_nobody_may_write_commands():
     assert "write cose/v1/devices/+/commands" not in text
     user_block = text.split("pattern", 1)[0]
     assert "topic write" not in user_block
+
+
+def test_write_spec_fixtures():
+    """Real builder output for apps/web/src/test/vegalite.test.ts, which compiles each spec with Vega-Lite."""
+    out = {f"{kind}-{n}": charts.build(PTS, METRICS[:n], title=f"{kind} {n}", kind=kind,
+                                        provenance_notes=["SIMULATED — test"], provenance=["simulated"])
+           for kind in charts.KINDS for n in (1, 2, 3)}
+    path = REPO / "apps/web/src/test/fixtures/specs.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    text = json.dumps(out, indent=1, sort_keys=True, default=str) + "\n"
+    if not path.exists() or path.read_text() != text:
+        path.write_text(text)

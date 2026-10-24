@@ -1,0 +1,121 @@
+# CoSE Cloud at HQ: Postgres + Mosquitto + ingest + API + Caddy (web app and /api on one origin).
+#   make wheels && deploy/compose/make_dev_pki.sh && cp deploy/compose/.env.example deploy/compose/.env  (edit it)
+#   docker compose -f deploy/compose/docker-compose.yml up -d --build
+#   docker compose -f deploy/compose/docker-compose.yml --profile seed run --rm seed      (first run)
+#   docker compose -f deploy/compose/docker-compose.yml --profile sim up -d sim           (live simulated XSeed)
+#   docker compose -f deploy/compose/docker-compose.yml --profile catalog run --rm catalog
+# Only the ingest and simulator services get broker certificates; the API has none (it cannot reach devices).
+name: cose-cloud
+
+x-services: &services
+  image: cose-cloud-services:${COSE_TAG:-dev}
+  build: {context: ../.., dockerfile: deploy/compose/Dockerfile.services}
+  restart: unless-stopped
+  environment: &env
+    COSE_DATABASE_URL: postgresql://cose:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@postgres:5432/cose
+
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cose
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: cose
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cose -d cose"]
+      interval: 2s
+      retries: 30
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports: ["${MQTT_BIND:-127.0.0.1}:8883:8883"]     # set MQTT_BIND=0.0.0.0 for devices on the HQ network
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./mosquitto/acl:/mosquitto/config/acl:ro
+      - ./pki/broker:/mosquitto/certs:ro
+
+  migrate:
+    <<: *services
+    restart: "no"
+    command: ["cose-cloud", "migrate"]
+    depends_on: {postgres: {condition: service_healthy}}
+
+  ingest:
+    <<: *services
+    command: ["cose-cloud-ingest"]
+    environment:
+      <<: *env
+      COSE_MQTT_HOST: mosquitto
+      COSE_MQTT_PORT: "8883"
+      COSE_MQTT_CA: /certs/ca.crt
+      COSE_MQTT_CERT: /certs/client.crt
+      COSE_MQTT_KEY: /certs/client.key
+    volumes: [./pki/clients/cose-cloud-ingest:/certs:ro]
+    depends_on: {migrate: {condition: service_completed_successfully}, mosquitto: {condition: service_started}}
+
+  api:
+    <<: *services
+    environment:
+      <<: *env
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      COSE_CHAT_MODEL: ${COSE_CHAT_MODEL:-claude-opus-5-5}
+      COSE_CHAT_EFFORT: ${COSE_CHAT_EFFORT:-medium}
+      COSE_LOCAL_LLM_URL: ${COSE_LOCAL_LLM_URL:-http://host.docker.internal:11434/v1}
+      COSE_LOCAL_LLM_MODEL: ${COSE_LOCAL_LLM_MODEL:-}
+      COSE_LLM_GLOBAL_MONTHLY_CAP_USD: ${COSE_LLM_GLOBAL_MONTHLY_CAP_USD:-50}
+      COSE_LLM_KILL_SWITCH: ${COSE_LLM_KILL_SWITCH:-false}
+      COSE_COOKIE_SECURE: ${COSE_COOKIE_SECURE:-false}
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    depends_on: {migrate: {condition: service_completed_successfully}}
+
+  caddy:
+    build: {context: ../.., dockerfile: deploy/compose/Dockerfile.web}
+    image: cose-cloud-web:${COSE_TAG:-dev}
+    restart: unless-stopped
+    ports: ["${HTTP_BIND:-127.0.0.1}:8428:8428"]
+    depends_on: [api]
+
+  # ---- one-shots and the simulator (profiles) ----
+  seed:
+    <<: *services
+    profiles: [seed]
+    restart: "no"
+    environment:
+      <<: *env
+      COSE_ADMIN_EMAIL: ${COSE_ADMIN_EMAIL:?set COSE_ADMIN_EMAIL in .env}
+      COSE_ADMIN_PASSWORD: ${COSE_ADMIN_PASSWORD:?set COSE_ADMIN_PASSWORD in .env}
+      COSE_LLM_MODE: ${COSE_LLM_MODE:-off}
+      COSE_LLM_CAP: ${COSE_LLM_CAP:-}
+      COSE_BACKFILL_DAYS: ${COSE_BACKFILL_DAYS:-6}
+    command: ["sh", "-c", "cose-cloud seed --admin-email \"$$COSE_ADMIN_EMAIL\" --llm-mode \"$$COSE_LLM_MODE\" $${COSE_LLM_CAP:+--llm-cap $$COSE_LLM_CAP} && cose-cloud-sim backfill --days-ago $$COSE_BACKFILL_DAYS"]
+    depends_on: {migrate: {condition: service_completed_successfully}}
+
+  sim:
+    <<: *services
+    profiles: [sim]
+    command: ["cose-cloud-sim", "live", "--device", "xseed-sim-0001"]
+    environment:
+      <<: *env
+      COSE_MQTT_HOST: mosquitto
+      COSE_MQTT_PORT: "8883"
+      COSE_MQTT_CA: /certs/ca.crt
+      COSE_MQTT_CERT: /certs/client.crt
+      COSE_MQTT_KEY: /certs/client.key
+    volumes: [./pki/clients/xseed-sim-0001:/certs:ro]
+    depends_on: [mosquitto, ingest]
+
+  catalog:
+    <<: *services
+    profiles: [catalog]
+    restart: "no"
+    environment:
+      <<: *env
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+    command: ["cose-cloud-catalog", "--org", "hq"]
+    depends_on: {migrate: {condition: service_completed_successfully}}
+
+volumes:
+  pgdata:

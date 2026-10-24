@@ -81,6 +81,15 @@ def test_series_and_since(client, data):
     assert bad.status_code == 400
 
 
+def test_dashboard_chart(client, data):
+    c = signed_in(client, data["org"])
+    r = c.get(f"/api/devices/{data['uuid']}/chart", params={"metrics": "sensors.dome_temp_c,sensors.vpd_kpa"}).json()
+    spec = r["spec"]
+    assert spec["usermeta"]["provenance"] == ["simulated"] and spec["title"]["subtitle"][0].startswith("SIMULATED")
+    assert set(spec["usermeta"]["series_by_metric"]) == {"sensors.dome_temp_c", "sensors.vpd_kpa"}
+    assert len(spec["vconcat"]) == 2
+
+
 def test_csv_export_is_labelled(client, data):
     c = signed_in(client, data["org"])
     r = c.get(f"/api/devices/{data['uuid']}/export", params={"metrics": "sensors.dome_temp_c", "bucket_s": 0})

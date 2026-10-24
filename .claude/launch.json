@@ -1,0 +1,47 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cose-cloud-api",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": [
+        "-m",
+        "cose_cloud.cli",
+        "serve",
+        "--env-file",
+        "deploy/dev.env"
+      ],
+      "port": 8429
+    },
+    {
+      "name": "cose-cloud-e2e-llm",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": [
+        "tests/e2e/fake_llm.py",
+        "--port",
+        "8439"
+      ],
+      "port": 8439
+    },
+    {
+      "name": "cose-cloud-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "apps/web",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5173",
+        "--strictPort"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "cose-cloud",
+      "url": "http://localhost:8428",
+      "port": 8428
+    }
+  ]
+}
