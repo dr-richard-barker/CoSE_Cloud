@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cose-ingest-core"
+version = "0.1.0"
+description = "CoSE Cloud ingest: one pure function from (topic, payload) to stored message + readings. No I/O, so the MQTT service and an AWS IoT rule -> Lambda path share it."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Collaborative Science Environment Inc. (CoSE)" }]
+dependencies = ["jsonschema>=4.21"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cose_ingest_core = ["schemas/*.json"]

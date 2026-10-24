@@ -1,0 +1,12 @@
+id: drone
+name: Cozy Canopy drone
+tagline: Aerial NDVI scans and canopy zones
+status: planned
+products: [drone]
+panels: [agent]
+agent_tools: [list_devices, list_metrics, list_experiments, search_catalog]
+data_source: >-
+  JSON-RPC 2.0 over WebSocket on the drone's own Wi-Fi network (decision OD-04), GeoTIFF and GeoJSON outputs.
+needs: >-
+  A JSON-RPC to MQTT relay on a host that joins the drone's network (DATA_INTEGRATION_SPEC.md §3.3), and an
+  airframe with networking firmware. No airframe has been built.

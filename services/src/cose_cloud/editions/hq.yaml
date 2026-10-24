@@ -1,0 +1,7 @@
+id: hq
+name: CoSE HQ
+tagline: Every CoSE instrument and past experiment, merged
+status: live
+products: [xseed, ground-rover, drone, sense, soilsense, algaflux, cmbs, magbio, scispinner]
+panels: [fleet, experiments, catalog, tools, agent]
+agent_tools: all

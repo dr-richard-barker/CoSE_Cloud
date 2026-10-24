@@ -1,0 +1,12 @@
+id: rover
+name: Ground Rover
+tagline: Field survey stations — soil flux, cone index and probe profiles
+status: planned
+products: [ground-rover]
+panels: [agent]
+agent_tools: [list_devices, list_metrics, list_experiments, search_catalog]
+data_source: >-
+  Station records on MQTT cose/v1/devices/{uuid}/station in the shared envelope (CoSE_ground_ROVER Dossier 06).
+needs: >-
+  A rover unit running the ROS 2 station publisher, and a metric registry for the station body (flux, cone,
+  probe). No unit has been built and the ROS 2 nodes are not written.

@@ -1,0 +1,79 @@
+# Past-experiment sources harvested into the HQ catalog: metadata and media links only, never the images.
+# Ported from the AstroBotany calibration database's built-in list (src/api/epicollect.ts BUILTIN, Aug-Oct 2026);
+# that app stays the place to view images and run marker analysis on them.
+# kind ec5: a public Epicollect5 project slug. kind github: owner/repo/ref/path of an image folder, optionally with a
+# metadata.csv sidecar joined by filename.
+
+- kind: ec5
+  slug: clinostat-collaboration
+  title: Clinostat Collaboration
+  url: https://five.epicollect.net/project/clinostat-collaboration
+- kind: ec5
+  slug: airi-microgreen-growth-biomass-analysis
+  title: AIRI Microgreen Growth & Biomass
+  url: https://five.epicollect.net/project/airi-microgreen-growth-biomass-analysis
+- kind: ec5
+  slug: growing-beyond-earth-2021-2022
+  title: Growing Beyond Earth 2021–2022
+  url: https://five.epicollect.net/project/growing-beyond-earth-2021-2022
+- kind: ec5
+  slug: nasa-roots
+  title: NASA Roots
+  url: https://five.epicollect.net/project/nasa-roots
+- kind: ec5
+  slug: the-spacechilechallenge-cose
+  title: The SpaceChileChallenge
+  url: https://five.epicollect.net/project/the-spacechilechallenge-cose
+
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/APEX05/images
+  title: APEX05 — root architecture (Flight vs GC)
+  provenance: {organism: Arabidopsis thaliana, conditions: "Flight vs Ground control, days 1–8, Col-0/cax2-2/cax2-3/rbohD"}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/NASA_OSDR/OSD-120/images
+  title: NASA OSD-120 — Arabidopsis roots (Flight vs Ground)
+  url: https://osdr.nasa.gov/bio/repo/data/studies/OSD-120
+  provenance: {organism: Arabidopsis thaliana, source: NASA OSDR OSD-120}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/NASA_OSDR/OSD-121/images
+  title: NASA OSD-121 — BRIC-16 Arabidopsis
+  url: https://osdr.nasa.gov/bio/repo/data/studies/OSD-121
+  provenance: {organism: Arabidopsis thaliana, source: NASA OSDR OSD-121}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/NASA_OSDR/OSD-476/images
+  title: NASA OSD-476 — Arabidopsis in lunar regolith
+  url: https://osdr.nasa.gov/bio/repo/data/studies/OSD-476
+  provenance: {organism: Arabidopsis thaliana, source: NASA OSDR OSD-476}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/TICTOC/images
+  title: TICTOC — cotton roots (Flight vs Ground)
+  url: https://github.com/dr-richard-barker/TICTOC
+  provenance: {organism: Gossypium (cotton), conditions: "Flight (ISS) vs Ground control, days 3–6"}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/APEX03
+  title: APEX03 — Arabidopsis Sku6 vs Col-0 (Flight vs Ground)
+  url: https://osdr.nasa.gov/bio/repo/data/studies/OSD-193
+  provenance: {organism: Arabidopsis thaliana, source: GitHub + NASA OSDR OSD-193}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/TASTIE_tomato/images
+  title: TASTIE — tomato roots ± Trichoderma
+  url: https://github.com/dr-richard-barker/TASTIE_tomato
+  provenance: {organism: Solanum lycopersicum (tomato), conditions: Control vs + Trichoderma}
+- kind: github
+  slug: dr-richard-barker/madwest-astrobotany/main/assets/timelapse
+  title: MadWest TREES — Populus ± ECM (Flight vs Ground)
+  url: https://github.com/dr-richard-barker/madwest-astrobotany
+  provenance: {organism: Populus tremula (aspen), conditions: "2×2: ± ectomycorrhiza × Flight/Ground"}
+- kind: github
+  slug: dr-richard-barker/madwest-astrobotany/main/assets/trees_stills/images
+  title: MadWest TREES — growth stills (Populus)
+  url: https://github.com/dr-richard-barker/madwest-astrobotany
+  provenance: {organism: Populus tremula (aspen)}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/ABRS_NASA_Roots_TimeLapse/ABRS_Flight
+  title: ABRS Roots time-lapse — Flight
+  provenance: {conditions: Flight}
+- kind: github
+  slug: dr-richard-barker/image-analysis-software-and-R-codes/master/ABRS_NASA_Roots_TimeLapse/ABRS_Ground_control
+  title: ABRS Roots time-lapse — Ground control
+  provenance: {conditions: Ground control}

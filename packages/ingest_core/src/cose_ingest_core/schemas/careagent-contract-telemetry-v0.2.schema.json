@@ -1,0 +1,388 @@
+{
+  "$defs": {
+    "ActiveOverride": {
+      "properties": {
+        "cmd_id": {
+          "title": "Cmd Id",
+          "type": "string"
+        },
+        "expires_in_s": {
+          "title": "Expires In S",
+          "type": "number"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "cmd_id",
+        "expires_in_s"
+      ],
+      "title": "ActiveOverride",
+      "type": "object"
+    },
+    "Actuators": {
+      "properties": {
+        "fan_exhaust_pwm_pct": {
+          "title": "Fan Exhaust Pwm Pct",
+          "type": "number"
+        },
+        "fan_intake_pwm_pct": {
+          "title": "Fan Intake Pwm Pct",
+          "type": "number"
+        },
+        "heater_pwm_pct": {
+          "title": "Heater Pwm Pct",
+          "type": "number"
+        },
+        "heater_relay": {
+          "title": "Heater Relay",
+          "type": "boolean"
+        },
+        "led_power_w": {
+          "title": "Led Power W",
+          "type": "number"
+        },
+        "led_pwm_pct": {
+          "$ref": "#/$defs/LedPct"
+        },
+        "pump_state": {
+          "enum": [
+            "IDLE",
+            "FLOOD"
+          ],
+          "title": "Pump State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "led_pwm_pct",
+        "led_power_w",
+        "heater_pwm_pct",
+        "heater_relay",
+        "fan_intake_pwm_pct",
+        "fan_exhaust_pwm_pct",
+        "pump_state"
+      ],
+      "title": "Actuators",
+      "type": "object"
+    },
+    "Biometrics": {
+      "properties": {
+        "biomass_volume_cm3": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Biomass Volume Cm3"
+        },
+        "canopy_height_avg_mm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Canopy Height Avg Mm"
+        },
+        "canopy_height_max_mm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Canopy Height Max Mm"
+        },
+        "canopy_uniformity_idx": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Canopy Uniformity Idx"
+        },
+        "growth_rate_mm_day": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Growth Rate Mm Day"
+        },
+        "tof_matrix_64": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 64,
+          "minItems": 64,
+          "title": "Tof Matrix 64",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "valid",
+        "canopy_height_avg_mm",
+        "canopy_height_max_mm",
+        "canopy_uniformity_idx",
+        "biomass_volume_cm3",
+        "growth_rate_mm_day",
+        "tof_matrix_64"
+      ],
+      "title": "Biometrics",
+      "type": "object"
+    },
+    "LedPct": {
+      "properties": {
+        "b": {
+          "title": "B",
+          "type": "number"
+        },
+        "fr": {
+          "title": "Fr",
+          "type": "number"
+        },
+        "r": {
+          "title": "R",
+          "type": "number"
+        },
+        "w": {
+          "title": "W",
+          "type": "number"
+        }
+      },
+      "required": [
+        "w",
+        "r",
+        "b",
+        "fr"
+      ],
+      "title": "LedPct",
+      "type": "object"
+    },
+    "Mode": {
+      "enum": [
+        "RUN",
+        "FAULT"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "Sensors": {
+      "properties": {
+        "dome_humidity_pct": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dome Humidity Pct"
+        },
+        "dome_temp_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dome Temp C"
+        },
+        "heater_plate_temp_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Heater Plate Temp C"
+        },
+        "root_temp_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Root Temp C"
+        },
+        "vpd_kpa": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vpd Kpa"
+        },
+        "water_basin_temp_c": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Water Basin Temp C"
+        },
+        "water_level_ok": {
+          "title": "Water Level Ok",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "dome_temp_c",
+        "dome_humidity_pct",
+        "root_temp_c",
+        "water_basin_temp_c",
+        "heater_plate_temp_c",
+        "water_level_ok",
+        "vpd_kpa"
+      ],
+      "title": "Sensors",
+      "type": "object"
+    }
+  },
+  "$id": "cose-care-agent/contract/telemetry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "active_overrides": {
+      "items": {
+        "$ref": "#/$defs/ActiveOverride"
+      },
+      "title": "Active Overrides",
+      "type": "array"
+    },
+    "actuators": {
+      "$ref": "#/$defs/Actuators"
+    },
+    "alerts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Alerts",
+      "type": "array"
+    },
+    "biometrics_3d": {
+      "$ref": "#/$defs/Biometrics"
+    },
+    "crop_profile": {
+      "title": "Crop Profile",
+      "type": "string"
+    },
+    "device_id": {
+      "title": "Device Id",
+      "type": "string"
+    },
+    "firmware_version": {
+      "title": "Firmware Version",
+      "type": "string"
+    },
+    "growth_day": {
+      "title": "Growth Day",
+      "type": "number"
+    },
+    "light_phase": {
+      "title": "Light Phase",
+      "type": "integer"
+    },
+    "mode": {
+      "$ref": "#/$defs/Mode"
+    },
+    "sensors": {
+      "$ref": "#/$defs/Sensors"
+    },
+    "seq": {
+      "title": "Seq",
+      "type": "integer"
+    },
+    "stage": {
+      "enum": [
+        "germination",
+        "emergence",
+        "peak_vegetative",
+        "finishing",
+        "harvest_ready"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "timestamp": {
+      "title": "Timestamp",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "device_id",
+    "timestamp",
+    "firmware_version",
+    "crop_profile",
+    "growth_day",
+    "stage",
+    "light_phase",
+    "sensors",
+    "biometrics_3d",
+    "actuators",
+    "alerts",
+    "seq",
+    "mode",
+    "active_overrides"
+  ],
+  "title": "Telemetry",
+  "type": "object"
+}
