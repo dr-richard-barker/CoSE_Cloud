@@ -14,7 +14,7 @@ The HQ stack is built so the move replaces parts without rewriting them.
 
 - **QoS 1 only.** No QoS 2 anywhere.
 - **Client ID = device UUID = certificate CN.** Care-Agent's transport currently adds a random suffix to client IDs; devices must use their UUID before M7.
-- **Payloads ≤ 128 KiB.** `normalise()` rejects larger ones, and the broker's `message_size_limit` matches.
+- **Payloads ≤ 128 KiB.** `normalise()` rejects larger ones, and the broker's `max_packet_size` (132096 bytes: 128 KiB plus 1 KiB for the packet header) matches.
 - **The rule must pass the payload bytes unchanged** (`encode(*, 'base64')`), so the sha256 dedupe is the same on both paths.
 - **No Postgres extensions** other than `citext`; no TimescaleDB.
 
@@ -22,7 +22,7 @@ The HQ stack is built so the move replaces parts without rewriting them.
 
 These are checks, not facts. Each needs the current AWS IoT Core quotas and documentation page cited when M7 starts.
 
-1. Maximum forward slashes and length of a topic. Today's tree uses 4 slashes, 5 for `modules/{n}`.
+1. Maximum forward slashes and length of a topic. Today's tree uses 4 slashes (`cose/v1/devices/{uuid}/{leaf}`). XSeed-µg's planned `modules/{n}/{leaf}` subtree (XSeed `docs/06_SOFTWARE_IOT_SPEC.md` §8.1) would use 6.
 2. Retained messages: whether, how many, size, and billing, before a retained `state` leaf is relied on.
 3. The keepalive range. Care-Agent uses 30 s.
 4. Delivery guarantees: at-least-once, possibly out of order. Ingest already dedupes by sha256 and orders by device timestamp.
