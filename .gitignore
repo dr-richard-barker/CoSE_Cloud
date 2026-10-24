@@ -12,3 +12,4 @@ deploy/compose/requirements.lock
 *.egg-info/
 deploy/dev.env
 deploy/compose/e2e.env
+.abai/
