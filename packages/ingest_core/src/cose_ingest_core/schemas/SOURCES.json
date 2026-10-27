@@ -1,5 +1,5 @@
 {
-  "note": "Verbatim copies. tests/test_schemas.py compares each with its source when the CoSE_tools workspace is next to this repo, and with the sha256 below everywhere.",
+  "note": "Verbatim copies. tests/test_schemas.py compares each with its source when this repo is inside or next to the CoSE_tools workspace, and with the sha256 below everywhere.",
   "envelope-v0.1.schema.json": {
     "source": "CoSE_tools/CoSE_Ecosystem/docs/cose-envelope-v0.1.schema.json",
     "commit": "4070117",

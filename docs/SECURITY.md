@@ -30,8 +30,8 @@ M1 runs on the HQ network or a VPN only.
 
 Every query filters on the organisation from the session; agent tools get it from the server. Tests cover this:
 
-- one organisation cannot see another's devices, readings, conversations or catalog, through the API or any agent tool;
-- a conversation is visible only to the user who started it.
+- one organisation cannot see another's devices, readings, datasets or catalog, through the API or any agent tool that takes a device, dataset or search (`services/tests/test_api.py`: `test_another_org_gets_404`, `test_another_orgs_dataset_gets_404`, `test_the_catalog_is_per_organisation`; `services/tests/test_agent.py`: `test_other_orgs_devices_are_invisible_to_tools`, `test_other_orgs_readings_datasets_and_catalog_are_invisible_to_tools`);
+- a conversation is visible only to the user who started it, not to a colleague in the same organisation or to another organisation (`test_a_conversation_is_visible_only_to_its_starter`).
 
 ## Model safety
 

@@ -159,6 +159,41 @@ def test_other_orgs_devices_are_invisible_to_tools(conn, world, make_org):
     assert not err and json.loads(out)["devices"] == []
 
 
+def test_other_orgs_readings_datasets_and_catalog_are_invisible_to_tools(conn, world, make_org):
+    owner, u = world["org"], world["uuid"]
+    with conn.transaction():
+        src = conn.execute("insert into catalog_sources (org_id, kind, slug, title) values (%s,'ec5','own','Owned') "
+                           "returning id", (owner["id"],)).fetchone()
+        conn.execute("insert into catalog_items (source_id, external_id, title, species, fields) values "
+                     "(%s,'e1','Owned run','Brassica oleracea','[]')", (src["id"],))
+    mine = tools.ToolContext(conn, owner["id"], owner["user_id"], world["cid"], now=NOW)
+    other = make_org()
+    theirs = tools.ToolContext(conn, other["id"], other["user_id"], None, now=NOW)
+    window = {"day": "yesterday", "start": None, "end": None}
+    out, err = tools.run(mine, "query_timeseries", {"device_uuid": u, "metrics": ["sensors.dome_temp_c"], **window,
+                                                    "bucket_minutes": None})
+    assert not err, out
+    ds = json.loads(out)["dataset_id"]
+    calls = [("describe_device", {"device_uuid": u}, "no device"),
+             ("summarize_stats", {"device_uuid": u, "metric": "sensors.dome_temp_c", **window}, "no device"),
+             ("query_timeseries", {"device_uuid": u, "metrics": ["sensors.dome_temp_c"], **window,
+                                   "bucket_minutes": None}, "no device"),
+             ("list_alerts", {"device_uuid": u, **window}, "no device"),
+             ("make_chart", {"dataset_ids": [ds], "kind": "line", "title": "Dome"}, "no dataset"),
+             ("prepare_export", {"dataset_id": ds, "format": "csv"}, "no dataset")]
+    for name, args, refusal in calls:
+        out, err = tools.run(mine, name, args)
+        assert not err, (name, out)
+        out, err = tools.run(theirs, name, args)
+        assert err and refusal in json.loads(out)["error"], (name, out)
+    assert theirs.charts == [] and theirs.exports == [] and theirs.provenance == set()
+    search = {"query": "Brassica", "species": None, "limit": None}
+    out, err = tools.run(mine, "search_catalog", search)
+    assert not err and len(json.loads(out)["items"]) == 1
+    out, err = tools.run(theirs, "search_catalog", search)
+    assert not err and json.loads(out)["items"] == []
+
+
 def test_catalog_text_comes_back_as_capped_untrusted_data(conn, world):
     org = world["org"]
     with conn.transaction():

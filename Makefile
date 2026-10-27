@@ -1,6 +1,6 @@
 # CoSE Cloud. `make check` = every test that needs no running stack; `make e2e` = the whole stack in Docker.
 PY ?= .venv/bin/python
-CARE_AGENT ?= ../CoSE_tools/CoSE-Care-Agent
+CARE_AGENT ?= ../CoSE-Care-Agent
 WHEELS = deploy/compose/wheels
 
 .PHONY: check test test-db web-test wheels pki acl e2e e2e-keep

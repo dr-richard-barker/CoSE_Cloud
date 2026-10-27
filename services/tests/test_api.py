@@ -4,12 +4,16 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import zipfile
 from datetime import datetime, timedelta, timezone
 
 import pytest
 from cose_care_agent.agent.providers.base import LLMResult, Usage
 from fastapi.testclient import TestClient
+
+from cose_cloud import auth
+from cose_cloud.agent import tools
 
 from conftest import PASSWORD, add_device, ingest, series_payloads
 
@@ -65,9 +69,60 @@ def test_another_org_gets_404(client, data, make_org):
     other = make_org()
     c = signed_in(client, other)
     assert c.get("/api/devices").json() == []
+    after = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
     for path in (f"/api/devices/{data['uuid']}", f"/api/devices/{data['uuid']}/latest",
-                 f"/api/devices/{data['uuid']}/series?metrics=sensors.dome_temp_c"):
+                 f"/api/devices/{data['uuid']}/series?metrics=sensors.dome_temp_c",
+                 f"/api/devices/{data['uuid']}/chart?metrics=sensors.dome_temp_c",
+                 f"/api/devices/{data['uuid']}/since?metrics=sensors.dome_temp_c&after={after}",
+                 f"/api/devices/{data['uuid']}/alerts",
+                 f"/api/devices/{data['uuid']}/export?metrics=sensors.dome_temp_c"):
         assert c.get(path).status_code == 404, path
+
+
+def test_another_orgs_dataset_gets_404(client, data, conn, make_org):
+    org = data["org"]
+    ctx = tools.ToolContext(conn, org["id"], org["user_id"], None)
+    start = (datetime.now(timezone.utc) - timedelta(hours=3)).isoformat()
+    out, err = tools.run(ctx, "query_timeseries", {"device_uuid": data["uuid"], "metrics": ["sensors.dome_temp_c"],
+                                                   "day": None, "start": start, "end": None, "bucket_minutes": 0})
+    assert not err, out
+    path = f"/api/datasets/{json.loads(out)['dataset_id']}/export"
+    assert signed_in(client, org).get(path).status_code == 200
+    client.post("/api/auth/logout")
+    assert signed_in(client, make_org()).get(path).status_code == 404
+
+
+def test_a_conversation_is_visible_only_to_its_starter(client, data, conn, make_org):
+    org = data["org"]
+    cid = signed_in(client, org).post("/api/agent/conversations", json={"edition": "xseed"}).json()["id"]
+    assert client.get(f"/api/agent/conversations/{cid}").status_code == 200
+    colleague = {"email": f"colleague{org['n']}-{os.getpid()}@example.org"}
+    with conn.transaction():
+        auth.create_user(conn, email=colleague["email"], password=PASSWORD, org_id=org["id"], role="analyst")
+    for someone_else in (colleague, make_org()):
+        client.post("/api/auth/logout")
+        c = signed_in(client, someone_else)
+        assert c.get(f"/api/agent/conversations/{cid}").status_code == 404
+        assert c.post(f"/api/agent/conversations/{cid}/ask", json={"question": "hi"}).status_code == 404
+
+
+def test_the_catalog_is_per_organisation(client, conn, make_org):
+    owner, other = make_org(), make_org()
+    slug = f"own-{owner['n']}"
+    with conn.transaction():
+        src = conn.execute("insert into catalog_sources (org_id, kind, slug, title) values (%s,'ec5',%s,'Owned') "
+                           "returning id", (owner["id"], slug)).fetchone()
+        conn.execute("insert into catalog_items (source_id, external_id, title, species, fields) values "
+                     "(%s,'e1','Owned run','Brassica oleracea','[]')", (src["id"],))
+    c = signed_in(client, owner)
+    assert [s["slug"] for s in c.get("/api/catalog/sources").json()] == [slug]
+    assert c.get("/api/catalog/items").json()["total"] == 1
+    assert c.get("/api/catalog/species").json() == [{"species": "Brassica oleracea", "n": 1}]
+    client.post("/api/auth/logout")
+    c = signed_in(client, other)
+    assert c.get("/api/catalog/sources").json() == []
+    assert c.get("/api/catalog/items").json() == {"total": 0, "items": []}
+    assert c.get("/api/catalog/species").json() == []
 
 
 def test_series_and_since(client, data):

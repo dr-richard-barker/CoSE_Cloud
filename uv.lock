@@ -175,7 +175,7 @@ wheels = [
 [[package]]
 name = "cose-care-agent"
 version = "0.1.1"
-source = { editable = "../CoSE_tools/CoSE-Care-Agent" }
+source = { editable = "../CoSE-Care-Agent" }
 dependencies = [
     { name = "anthropic" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
@@ -223,7 +223,7 @@ dependencies = [
 requires-dist = [
     { name = "anthropic", specifier = ">=1.15,<2" },
     { name = "argon2-cffi", specifier = ">=23.1" },
-    { name = "cose-care-agent", extras = ["mqtt"], editable = "../CoSE_tools/CoSE-Care-Agent" },
+    { name = "cose-care-agent", extras = ["mqtt"], editable = "../CoSE-Care-Agent" },
     { name = "cose-ingest-core", editable = "packages/ingest_core" },
     { name = "fastapi", specifier = ">=0.115" },
     { name = "httpx", specifier = ">=0.27" },

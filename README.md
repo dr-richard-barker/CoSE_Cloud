@@ -41,7 +41,7 @@ The rest is in `docs/`:
 ## Run it at HQ (Docker)
 
 ```bash
-make wheels                       # CoSE-Care-Agent wheel + pinned requirements (needs ../CoSE_tools/CoSE-Care-Agent)
+make wheels                       # CoSE-Care-Agent wheel + pinned requirements (needs ../CoSE-Care-Agent)
 make pki                          # throwaway development certificates (never production)
 cp deploy/compose/.env.example deploy/compose/.env   # then edit the passwords and the agent mode
 docker compose -f deploy/compose/docker-compose.yml up -d --build

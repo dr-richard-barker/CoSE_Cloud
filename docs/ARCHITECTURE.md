@@ -59,7 +59,7 @@ Prices are not decided. The three cloud prices in CoSE's documents conflict, and
 
 ## Dependencies
 
-- **CoSE-Care-Agent v0.1.1** (`../CoSE_tools/CoSE-Care-Agent`).
+- **CoSE-Care-Agent v0.1.1** (`../CoSE-Care-Agent`).
   - What CoSE Cloud uses from it: the simulator (SimPod, SimDevice), the topic tree and broker rules, the model providers (Anthropic, local, fake), and the cost meter with its sourced `pricing.yaml`.
   - Development uses an editable path dependency. Images install the wheel that `make wheels` builds.
   - It has no remote yet. Once its GitHub repository exists, switch `[tool.uv.sources]` to a git source pinned by tag, and add the services tests to CI.
