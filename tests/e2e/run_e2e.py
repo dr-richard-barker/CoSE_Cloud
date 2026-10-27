@@ -8,7 +8,8 @@
 4. The web app is served; the XSeed chart for the last minutes carries the SIMULATED label and live points.
 5. Ask CoSE_Agent for yesterday's mean dome temperature (the scripted model drives the real tool loop): the
    answer must match an independent SQL average, with one labelled chart and $0 in the ledger.
-Uses its own compose project and random passwords (deploy/compose/e2e.env, git-ignored); tears down unless --keep.
+Uses its own compose project and random passwords (deploy/compose/e2e.env, git-ignored). Unless --keep, it then tears
+everything down, profile services included, and checks that no container of the project is left.
 """
 
 from __future__ import annotations
@@ -37,6 +38,18 @@ def compose(*args: str, check: bool = True, capture: bool = False) -> subprocess
     cmd = ["docker", "compose", "-p", PROJECT, "--env-file", str(ENV_FILE), "-f", "docker-compose.yml",
            "-f", "docker-compose.e2e.yml", *args]
     return subprocess.run(cmd, cwd=COMPOSE_DIR, check=check, text=True, capture_output=capture)
+
+
+def down() -> None:
+    """Remove the stack, services behind a profile included: a plain `down` leaves the live simulator running."""
+    profiles = compose("config", "--profiles", check=False, capture=True).stdout.split()
+    compose(*(a for p in profiles for a in ("--profile", p)), "down", "-v", "--remove-orphans", check=False, capture=True)
+
+
+def leftover_containers() -> list[str]:
+    out = subprocess.run(["docker", "ps", "-a", "--filter", f"label=com.docker.compose.project={PROJECT}",
+                          "--format", "{{.Names}}"], text=True, capture_output=True).stdout
+    return out.split()
 
 
 def sql(query: str) -> str:
@@ -73,7 +86,7 @@ def main() -> int:
         f"COSE_ADMIN_PASSWORD={password}", "COSE_LLM_MODE=local", "COSE_BACKFILL_DAYS=6", "COSE_TAG=e2e",
         "HTTP_BIND=127.0.0.1", "MQTT_BIND=127.0.0.1", ""]))
     try:
-        compose("down", "-v", "--remove-orphans", check=False, capture=True)
+        down()
         print("building images…", flush=True)
         compose("build", "migrate", capture=True)          # one build of the shared services image
         compose("build", "caddy", capture=True)
@@ -138,7 +151,9 @@ def main() -> int:
         if a.keep:
             print(f"stack left running: {BASE} (sign-in e2e-admin@cose.test, password in {ENV_FILE})")
         else:
-            compose("down", "-v", "--remove-orphans", check=False, capture=True)
+            down()
+            left = leftover_containers()
+            record("teardown leaves no containers", not left, ", ".join(left))
     failed = [n for n, ok, _ in CHECKS if not ok]
     print(f"\n{len(CHECKS) - len(failed)}/{len(CHECKS)} checks passed" + (f"; failed: {failed}" if failed else ""))
     return 1 if failed or not CHECKS else 0
