@@ -2,9 +2,9 @@
   "note": "Verbatim copies. tests/test_schemas.py compares each with its source when this repo is inside or next to the CoSE_tools workspace, and with the sha256 below everywhere.",
   "envelope-v0.1.schema.json": {
     "source": "CoSE_tools/CoSE_Ecosystem/docs/cose-envelope-v0.1.schema.json",
-    "commit": "6be0585",
+    "commit": "e69326c",
     "status": "proposal v0.1, not adopted (DATA_INTEGRATION_SPEC.md)",
-    "sha256": "0c160a6f9b8a2481f40be5be0fe7f6df1191189257f326abf363e16efa968913"
+    "sha256": "e61c7428128f8508b0ab4806383594241b9c328bf2280a827c34367589377669"
   },
   "xseed-telemetry-v1.schema.json": {
     "source": "CoSE_tools/CoSE_MicroGreen_Xseed/XSeed-Microgreen-Incubator/firmware/schema/telemetry.schema.json",

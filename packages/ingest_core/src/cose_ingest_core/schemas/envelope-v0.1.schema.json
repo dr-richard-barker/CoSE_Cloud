@@ -14,7 +14,7 @@
     "fw": {"type": "string", "description": "Firmware version"},
     "seq": {"type": "integer", "minimum": 0, "description": "Monotonic per device; gaps mean dropped messages"},
     "ts": {"type": "string", "format": "date-time", "description": "UTC, ISO 8601 with milliseconds, NTP-disciplined"},
-    "mode": {"type": "string", "description": "Device mode in the product's own terms. A Care Agent pod (XSeed) reports RUN, or FAULT while the heater trip is latched (Care contract C12); its recipe runs under RUN and is not a mode"},
+    "mode": {"type": "string", "description": "Device mode in the product's own terms. A Care Agent pod (XSeed) reports RUN; FAULT while the heater trip is latched; otherwise MAINTENANCE while a maintenance override is active (Care contract v0.3, C12). Its recipe runs under RUN and is not a mode"},
     "experiment_id": {"type": "string", "description": "Optional join key to MIAPPE study metadata and the RO-Crate bundle"},
     "body": {"type": "object", "description": "Product payload, unchanged from the product's own schema"}
   }
