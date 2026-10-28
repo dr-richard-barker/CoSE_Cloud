@@ -58,6 +58,5 @@ Plain Postgres 17 with only the `citext` extension, so the same migrations run o
 
 ## Known gaps in the shared spec (to raise with its owner)
 
-- The envelope's `product` enum has no Ground Rover, though the rover is the one product whose design already uses the envelope (its spec says `ground-rover`).
-- The envelope's `mode` examples (`recipe`, `override`, `safe`) differ from the XSeed contract's (`RUN`, `FAULT`).
+- Raised and fixed in the shared spec on 28 Oct 2026 (CoSE_tools 6be0585, branch `docs/resolve-open-decisions`): the envelope's `product` enum now lists `ground-rover`, and its `mode` example and description follow the XSeed contract (`RUN`, `FAULT`). The copy in `packages/ingest_core` is re-recorded from that commit.
 - The rover's `station` leaf is not among Care-Agent's device leaves, so the broker rules would deny it. M4 adds it.

@@ -9,12 +9,12 @@
   "properties": {
     "schema": {"type": "string", "format": "uri", "description": "$id of the product body schema, e.g. https://cosecloud.com/schemas/xseed/telemetry/v1"},
     "device_uuid": {"type": "string", "minLength": 8, "description": "Same UUID as in the topic path"},
-    "product": {"type": "string", "enum": ["xseed", "algaflux", "soilsense", "cmbs", "magbio", "sense", "drone", "scispinner", "careagent"]},
+    "product": {"type": "string", "enum": ["xseed", "algaflux", "soilsense", "cmbs", "magbio", "sense", "drone", "scispinner", "careagent", "ground-rover"]},
     "variant": {"type": "string", "description": "e.g. lite, pro, ug"},
     "fw": {"type": "string", "description": "Firmware version"},
     "seq": {"type": "integer", "minimum": 0, "description": "Monotonic per device; gaps mean dropped messages"},
     "ts": {"type": "string", "format": "date-time", "description": "UTC, ISO 8601 with milliseconds, NTP-disciplined"},
-    "mode": {"type": "string", "description": "Device mode, e.g. recipe, override, safe"},
+    "mode": {"type": "string", "description": "Device mode in the product's own terms. A Care Agent pod (XSeed) reports RUN, or FAULT while the heater trip is latched (Care contract C12); its recipe runs under RUN and is not a mode"},
     "experiment_id": {"type": "string", "description": "Optional join key to MIAPPE study metadata and the RO-Crate bundle"},
     "body": {"type": "object", "description": "Product payload, unchanged from the product's own schema"}
   }
