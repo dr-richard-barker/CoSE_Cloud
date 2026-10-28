@@ -11,7 +11,7 @@ Pure, never raises, no I/O (`packages/ingest_core`). The Mosquitto subscriber, t
 - **Shapes accepted on `telemetry`:**
   - **envelope**: proposal v0.1, the body validated by its product schema;
   - **xseed_fw**: the XSeed firmware payload;
-  - **xseed_contract**: CoSE-Care-Agent contract v0.2, which is the firmware payload plus `seq`, `mode` and `active_overrides`, and is what the simulator sends.
+  - **xseed_contract**: CoSE-Care-Agent contract v0.3, which is the firmware payload plus `seq`, `mode` and `active_overrides`, and is what the simulator sends. A v0.2 payload validates too: v0.3 only adds the mode `MAINTENANCE`.
   The firmware schema rejects the contract shape (`additionalProperties: false`), so each is validated against its own schema.
 - **Other leaves without an envelope** (`state`, `alerts`, `acks`) are stored as `raw`, with no readings.
 - **Limits.** 128 KiB payloads, matching AWS IoT Core. Device clocks more than a day ahead of the server are rejected.

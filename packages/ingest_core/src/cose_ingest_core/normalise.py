@@ -9,8 +9,9 @@ Rules (docs/DATA_MODEL.md has the reasoning):
 - Provenance comes from the device registry (`data_origin`), never from the payload: hardware -> measured,
   simulator -> simulated, replay -> replay.
 - Three telemetry shapes are accepted: the envelope (proposal v0.1), the XSeed firmware payload, and the
-  Care-Agent contract v0.2 payload (firmware payload + seq/mode/active_overrides, what the simulator sends; the
-  firmware schema rejects it because of `additionalProperties: false`).
+  Care-Agent contract v0.3 payload (firmware payload + seq/mode/active_overrides, what the simulator sends; a v0.2
+  payload validates too, as v0.3 only adds the mode MAINTENANCE; the firmware schema rejects it because of
+  `additionalProperties: false`).
 - A JSON null becomes a reading with the metric's null meaning as its quality; an omitted field becomes no row.
 """
 
@@ -96,7 +97,7 @@ def validator(name: str) -> Draft202012Validator:
 
 ENVELOPE = "envelope-v0.1.schema.json"
 XSEED_FW = "xseed-telemetry-v1.schema.json"
-XSEED_CONTRACT = "careagent-contract-telemetry-v0.2.schema.json"
+XSEED_CONTRACT = "careagent-contract-telemetry-v0.3.schema.json"
 
 
 def parse_topic(topic: str) -> Optional[tuple[str, str]]:

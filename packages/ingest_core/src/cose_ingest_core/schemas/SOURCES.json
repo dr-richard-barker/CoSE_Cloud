@@ -12,10 +12,10 @@
     "status": "XSeed firmware payload; top-level additionalProperties false",
     "sha256": "a70c2fcff37bcb1621ddc67bf28d11450ff778e0b34aad25a65f43dc3892b5dc"
   },
-  "careagent-contract-telemetry-v0.2.schema.json": {
+  "careagent-contract-telemetry-v0.3.schema.json": {
     "source": "CoSE_tools/CoSE-Care-Agent/handoff/schemas/telemetry.schema.json",
-    "commit": "2bf0a5d",
-    "status": "Care-Agent contract v0.2 = firmware payload + seq, mode, active_overrides (what the simulator sends)",
-    "sha256": "8d21ceafc41d102797f29ebc0543cb24af31fb2b041d1775667d0af46d1481bc"
+    "commit": "d6dc133",
+    "status": "Care-Agent contract v0.3 = firmware payload + seq, mode (RUN, FAULT, MAINTENANCE), active_overrides (what the simulator sends); v0.2 payloads validate too",
+    "sha256": "af03a500e48b5c0962743c981f5fc70124261250464a70132f67f76f315f57f2"
   }
 }

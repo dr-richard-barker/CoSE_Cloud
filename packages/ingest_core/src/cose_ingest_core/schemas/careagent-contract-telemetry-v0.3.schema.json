@@ -207,7 +207,8 @@
     "Mode": {
       "enum": [
         "RUN",
-        "FAULT"
+        "FAULT",
+        "MAINTENANCE"
       ],
       "title": "Mode",
       "type": "string"
