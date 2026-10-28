@@ -58,5 +58,5 @@ Plain Postgres 17 with only the `citext` extension, so the same migrations run o
 
 ## Known gaps in the shared spec (to raise with its owner)
 
-- Raised and fixed in the shared spec on 28 Oct 2026 (CoSE_tools 6be0585 and e69326c, branch `chore/workspace-followups`): the envelope's `product` enum now lists `ground-rover`, and its `mode` example and description follow the Care Agent contract v0.3 (`RUN`, `FAULT`, `MAINTENANCE`). The copy in `packages/ingest_core` is re-recorded from e69326c.
+- Raised and fixed in the shared spec on 28 Oct 2026 (CoSE_tools workspace commits 6be0585 and e69326c): the envelope's `product` enum now lists `ground-rover`, and its `mode` example and description follow the Care Agent contract v0.3 (`RUN`, `FAULT`, `MAINTENANCE`). The copy in `packages/ingest_core` is re-recorded from e69326c.
 - The rover's `station` leaf is not among Care-Agent's device leaves, so the broker rules would deny it. M4 adds it.
