@@ -1,0 +1,12 @@
+id: xseed
+name: XSeed
+tagline: Microgreen growth chamber — climate, canopy and recipe
+status: live
+products: [xseed]
+panels: [live, latest, alerts, experiments, export, agent]
+agent_tools: [list_devices, describe_device, list_metrics, get_latest, summarize_stats, query_timeseries, list_alerts,
+              list_experiments, make_chart, prepare_export]
+key_metrics: [sensors.dome_temp_c, sensors.dome_humidity_pct, sensors.vpd_kpa, biometrics_3d.canopy_height_avg_mm]
+data_note: >-
+  No XSeed unit has been built yet. This edition runs on a simulated XSeed (CoSE-Care-Agent SimPod, the XSeed
+  firmware core plus plant physics); every value it shows is simulated and labelled so.

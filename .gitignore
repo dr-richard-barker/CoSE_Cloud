@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+apps/web/dist/
+deploy/compose/.env
+deploy/compose/pki/
+deploy/compose/wheels/
+deploy/compose/requirements.lock
+.DS_Store
+*.egg-info/
+deploy/dev.env
+deploy/compose/e2e.env
+.abai/

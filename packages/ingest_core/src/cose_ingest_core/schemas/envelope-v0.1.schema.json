@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cosecloud.com/schemas/envelope/v0.1",
+  "title": "CoSE telemetry envelope (PROPOSAL v0.1, not adopted)",
+  "description": "Common header for messages on cose/v1/devices/{device_uuid}/{leaf}. The body is the product's existing payload, validated by the product schema named in 'schema'. See CoSE_Ecosystem/docs/DATA_INTEGRATION_SPEC.md §3.2. Missing-value rule is an open decision.",
+  "type": "object",
+  "required": ["schema", "device_uuid", "product", "fw", "seq", "ts", "body"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"type": "string", "format": "uri", "description": "$id of the product body schema, e.g. https://cosecloud.com/schemas/xseed/telemetry/v1"},
+    "device_uuid": {"type": "string", "minLength": 8, "description": "Same UUID as in the topic path"},
+    "product": {"type": "string", "enum": ["xseed", "algaflux", "soilsense", "cmbs", "magbio", "sense", "drone", "scispinner", "careagent"]},
+    "variant": {"type": "string", "description": "e.g. lite, pro, ug"},
+    "fw": {"type": "string", "description": "Firmware version"},
+    "seq": {"type": "integer", "minimum": 0, "description": "Monotonic per device; gaps mean dropped messages"},
+    "ts": {"type": "string", "format": "date-time", "description": "UTC, ISO 8601 with milliseconds, NTP-disciplined"},
+    "mode": {"type": "string", "description": "Device mode, e.g. recipe, override, safe"},
+    "experiment_id": {"type": "string", "description": "Optional join key to MIAPPE study metadata and the RO-Crate bundle"},
+    "body": {"type": "object", "description": "Product payload, unchanged from the product's own schema"}
+  }
+}

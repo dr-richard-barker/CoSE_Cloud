@@ -1,0 +1,27 @@
+# uv workspace for the CoSE Cloud services. The web app (apps/web) has its own package.json.
+[project]
+name = "cose-cloud-workspace"
+version = "0.1.0"
+requires-python = ">=3.11,<3.13"
+dependencies = ["cose-cloud", "cose-ingest-core"]
+
+[dependency-groups]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/ingest_core", "services"]
+
+[tool.uv.sources]
+cose-cloud = { workspace = true }
+cose-ingest-core = { workspace = true }
+# CoSE's own supervisory controller and XSeed simulator. A sibling checkout during development; Docker images
+# install the wheel that `make wheels` builds from it (see deploy/compose/README.md).
+cose-care-agent = { path = "../CoSE-Care-Agent", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["packages/ingest_core/tests", "services/tests"]
+addopts = "-q"
+markers = ["db: needs Postgres (COSE_TEST_DATABASE_URL; `make test-db` starts one)"]

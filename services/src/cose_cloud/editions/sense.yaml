@@ -1,0 +1,12 @@
+id: sense
+name: senSE
+tagline: Gas exchange — CO₂, O₂, temperature, humidity, pressure
+status: planned
+products: [sense]
+panels: [agent]
+agent_tools: [list_devices, list_metrics, list_experiments, search_catalog]
+data_source: >-
+  Local HTTP/WebSocket API at sense.local (/api/v1/samples, /stream); no MQTT by design.
+needs: >-
+  An MQTT publisher on the Pi Zero 2 W or a host-side poller of /api/v1/* (DATA_INTEGRATION_SPEC.md §3.3), and
+  a metric registry for the senSE record. No unit has been built.

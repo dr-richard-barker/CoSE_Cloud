@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoSE Cloud edition profile",
+  "type": "object",
+  "required": ["id", "name", "tagline", "status", "products", "panels", "agent_tools"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z]+$"},
+    "name": {"type": "string"},
+    "tagline": {"type": "string"},
+    "status": {"enum": ["live", "planned"]},
+    "products": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "panels": {"type": "array", "items": {"enum": ["fleet", "experiments", "catalog", "tools", "live", "latest",
+                                                   "alerts", "export", "agent"]}},
+    "agent_tools": {"oneOf": [{"const": "all"}, {"type": "array", "items": {"type": "string"}}]},
+    "key_metrics": {"type": "array", "items": {"type": "string"}},
+    "data_note": {"type": "string"},
+    "data_source": {"type": "string"},
+    "needs": {"type": "string"}
+  },
+  "if": {"properties": {"status": {"const": "planned"}}},
+  "then": {"required": ["data_source", "needs"]}
+}

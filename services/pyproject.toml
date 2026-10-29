@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cose-cloud"
+version = "0.1.0"
+description = "CoSE Cloud services: registry, ingest, past-experiment catalog, API and CoSE_Agent."
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Collaborative Science Environment Inc. (CoSE)" }]
+dependencies = [
+  "cose-ingest-core",
+  "cose-care-agent[mqtt]>=0.1.1",
+  "anthropic>=1.15,<2",            # the major CoSE-Care-Agent's provider was written and tested against
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+  "psycopg[binary]>=3.2",
+  "psycopg-pool>=3.2",
+  "argon2-cffi>=23.1",
+  "httpx>=0.27",
+  "pyyaml>=6",
+  "jsonschema>=4.21",
+]
+
+[project.scripts]
+cose-cloud = "cose_cloud.cli:main"
+cose-cloud-ingest = "cose_cloud.ingestd:main"
+cose-cloud-sim = "cose_cloud.sim:main"
+cose-cloud-catalog = "cose_cloud.catalog:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cose_cloud = ["catalog_sources.yaml", "migrations/*.sql", "editions/*.yaml", "editions/*.json"]

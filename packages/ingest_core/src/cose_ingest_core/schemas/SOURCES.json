@@ -1,0 +1,21 @@
+{
+  "note": "Verbatim copies. tests/test_schemas.py compares each with its source when this repo is inside or next to the CoSE_tools workspace, and with the sha256 below everywhere.",
+  "envelope-v0.1.schema.json": {
+    "source": "CoSE_tools/CoSE_Ecosystem/docs/cose-envelope-v0.1.schema.json",
+    "commit": "4070117",
+    "status": "proposal v0.1, not adopted (DATA_INTEGRATION_SPEC.md)",
+    "sha256": "b91f6ca5d028f8c415fdb1a6881afee410940e4eef9b1ef39042ada30afa7b9d"
+  },
+  "xseed-telemetry-v1.schema.json": {
+    "source": "CoSE_tools/CoSE_MicroGreen_Xseed/XSeed-Microgreen-Incubator/firmware/schema/telemetry.schema.json",
+    "commit": "f2eca9d",
+    "status": "XSeed firmware payload; top-level additionalProperties false",
+    "sha256": "a70c2fcff37bcb1621ddc67bf28d11450ff778e0b34aad25a65f43dc3892b5dc"
+  },
+  "careagent-contract-telemetry-v0.3.schema.json": {
+    "source": "CoSE_tools/CoSE-Care-Agent/handoff/schemas/telemetry.schema.json",
+    "commit": "d6dc133",
+    "status": "Care-Agent contract v0.3 = firmware payload + seq, mode (RUN, FAULT, MAINTENANCE), active_overrides (what the simulator sends); v0.2 payloads validate too",
+    "sha256": "af03a500e48b5c0962743c981f5fc70124261250464a70132f67f76f315f57f2"
+  }
+}

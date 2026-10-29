@@ -1,0 +1,33 @@
+# Tests that run without CoSE-Care-Agent (it has no public repository yet): the ingest core and the web app.
+# The services tests need Care-Agent and Postgres; they run locally with `make check` until Care-Agent's
+# repository exists and CI can install it (docs/ARCHITECTURE.md, "Dependencies").
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ingest-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install ./packages/ingest_core pytest
+      - run: python -m pytest packages/ingest_core/tests -q
+
+  web:
+    runs-on: ubuntu-latest
+    defaults: {run: {working-directory: apps/web}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm, cache-dependency-path: apps/web/package-lock.json}
+      - run: npm ci --no-audit --no-fund
+      - run: npx tsc --noEmit
+      - run: npx vitest run
+      - run: npx vite build

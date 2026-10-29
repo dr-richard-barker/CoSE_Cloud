@@ -1,0 +1,16 @@
+# CoSE Cloud broker access rules (generated: cose-cloud acl). Username = client certificate CN.
+# Anything not granted here is denied. No user may write `commands` in M1.
+
+# the ingest service: reads every device's reports, writes nothing
+user cose-cloud-ingest
+topic read cose/v1/devices/+/telemetry
+topic read cose/v1/devices/+/acks
+topic read cose/v1/devices/+/state
+topic read cose/v1/devices/+/alerts
+
+# every device (certificate CN = device UUID): its own tree only
+pattern write cose/v1/devices/%u/telemetry
+pattern write cose/v1/devices/%u/acks
+pattern write cose/v1/devices/%u/state
+pattern write cose/v1/devices/%u/alerts
+pattern read cose/v1/devices/%u/commands

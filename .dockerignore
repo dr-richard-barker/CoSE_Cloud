@@ -1,0 +1,14 @@
+# Build context for deploy/compose/Dockerfile.*: source only. Never send keys, venvs or node_modules.
+.git
+.venv
+**/__pycache__
+**/*.egg-info
+**/.pytest_cache
+apps/web/node_modules
+apps/web/dist
+deploy/compose/pki
+deploy/compose/.env
+deploy/compose/e2e.env
+deploy/dev.env
+Hub
+.claude

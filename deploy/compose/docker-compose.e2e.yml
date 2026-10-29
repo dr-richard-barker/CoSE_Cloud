@@ -1,0 +1,11 @@
+# End-to-end test overlay: the scripted model server, with the API pointed at it as the HQ org's local model.
+services:
+  fake-llm:
+    image: cose-cloud-services:${COSE_TAG:-dev}
+    build: {context: ../.., dockerfile: deploy/compose/Dockerfile.services}
+    command: ["python", "/app/tests/e2e/fake_llm.py", "--host", "0.0.0.0", "--port", "8439"]
+  api:
+    environment:
+      COSE_LOCAL_LLM_URL: http://fake-llm:8439/v1
+      COSE_LOCAL_LLM_MODEL: e2e-scripted
+    depends_on: [fake-llm]

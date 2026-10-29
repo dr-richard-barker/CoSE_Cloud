@@ -1,0 +1,14 @@
+# CoSE Cloud services image (api, ingest, sim, catalog, migrations). Build context: the repository root.
+# `make wheels` first: it builds the CoSE-Care-Agent wheel and the pinned requirements (deploy/compose/wheels/).
+FROM python:3.11-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
+WORKDIR /app
+COPY deploy/compose/wheels/ /wheels/
+RUN pip install -r /wheels/requirements.lock && pip install --no-deps /wheels/*.whl
+COPY packages/ingest_core /src/packages/ingest_core
+COPY services /src/services
+RUN pip install --no-deps /src/packages/ingest_core /src/services && useradd --system --uid 10001 cose
+COPY tests/e2e /app/tests/e2e
+USER cose
+EXPOSE 8429
+CMD ["uvicorn", "cose_cloud.api:app", "--host", "0.0.0.0", "--port", "8429", "--proxy-headers"]

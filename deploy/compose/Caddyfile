@@ -1,0 +1,25 @@
+# One origin for the app and its API, so the session cookie stays first-party. HTTP on 8428 for the HQ LAN/VPN in
+# M1; anything reachable from the internet needs TLS here and the security review in docs/SECURITY.md first.
+{
+	admin off
+	auto_https off
+}
+
+:8428 {
+	encode zstd gzip
+	header {
+		Content-Security-Policy "default-src 'self'; img-src 'self' https: data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Permissions-Policy "camera=(), geolocation=(), microphone=(self)"
+		-Server
+	}
+	handle /api/* {
+		reverse_proxy api:8429
+	}
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}
